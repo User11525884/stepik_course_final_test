@@ -19,10 +19,10 @@ class ProductPageLocators():
     BUTTON_GO_TO_BASKET = (By.CSS_SELECTOR, "#default > header > div.page_inner > div > div.basket-mini.pull-right.hidden-xs > span > a")
 
     NAME_PRODUCT = (By.CSS_SELECTOR, ".product_main h1")
-    NAME_PRODUCT_BASKET = (By.CSS_SELECTOR, "#basket_formset > div > div > div.col-sm-4 > h3 > a")
+    NAME_PRODUCT_BASKET = (By.CSS_SELECTOR, "#messages > div:nth-child(1) > div > strong")
 #basket_formset > div > div > div.col-sm-4 > h3 > a
     PRICE_PRODUCT = (By.CSS_SELECTOR, "#content_inner > article > div.row > div.col-sm-6.product_main > p.price_color")
-    PRICE_PRODUCT_BASKET = (By.CSS_SELECTOR, "#basket_formset > div > div > div.col-sm-1 > p")
+    PRICE_PRODUCT_BASKET = (By.CSS_SELECTOR, "#messages > div.alert.alert-safe.alert-noicon.alert-info.fade.in > div > p:nth-child(1) > strong")
 
 
     #browse > li > ul > li.dropdown-submenu > a
