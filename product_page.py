@@ -2,18 +2,13 @@ from .base_page import BasePage
 from .locators import ProductPageLocators
 
 
-
 class ProductPage(BasePage):
     def should_be_product_page(self):
         self.should_be_button_add_to_basket()
         self.add_to_product_basket()
-        # self.go_to_begining_page()
         self.coincidence_of_names()
-        # self.go_to_back_page() # возвращаемся на back страницу 
         self.prices_are_equal()
-        # self.go_to_back_page() # возвращаемся на back страницу 
 
-    #     self.should_be_register_form()
     def should_be_button_add_to_basket(self):
         assert self.is_element_present(*ProductPageLocators.BUTTON_ADD_TO_BASKET), "Button add to basket is not presented"    	
     
@@ -24,15 +19,29 @@ class ProductPage(BasePage):
 
     def coincidence_of_names(self):
         name_product = self.browser.find_element(*ProductPageLocators.NAME_PRODUCT).text
-        assert self.browser.find_element(*ProductPageLocators.NAME_PRODUCT_BASKET).text == name_product, f"In basket not product with name - {name_product}"
+        assert self.browser.find_element(*ProductPageLocators.NAME_PRODUCT_BASKET).text == name_product, \
+        f"In basket not product with name - {name_product}"
         
     def prices_are_equal(self):
         price_product = float(self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT).text.split("&")[0][1:])
-        assert float(self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT_BASKET).text.split("&")[0][1:]) == price_product, f"In basket other price {str(price_product)}"
+        assert float(self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT_BASKET).text.split("&")[0][1:]) == price_product, \
+        f"In basket other price {str(price_product)}"
 
-    def go_to_begining_page(self):
-        button = self.browser.find_element(*ProductPageLocators.BEGINING_LINK)  
-        button.click()
+    def should_be_message_disappeared_after_adding_product_to_basket(self):
+        self.add_to_product_basket()
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+        "Success message is not disappeared"
 
-    def go_to_back_page(self):
-        self.browser.back()
+    def should_not_be_success_message_after_adding_product_to_basket(self):
+        self.add_to_product_basket()
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+        "Success message is presented, but should not be"
+
+    def should_be_see_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+        "Success message is not presented"
+
+
+
+
+
